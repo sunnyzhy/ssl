@@ -1,48 +1,44 @@
-# 官网
-https://www.openssl.org/source/
+# 安装 ssl
+## linux 下安装 ssl
+[openssl](https://www.openssl.org/source/ 'openssl')
 
-# 安装依赖库
-```
+### 1. 安装依赖库
+```bash
 # yum -y install gcc
 ```
 
-# 编译 & 安装
-```
-# cd /usr/local/ssl
+### 2. 编译 & 安装
+```bash
+# mkdir -p /usr/local/openssl
 
-# tar -zxvf openssl-1.1.0g.tar.gz
-
-# cd openssl-1.1.0g
-
-# ./config --prefix=/usr/local/ssl --openssldir=/usr/local/ssl
-
-# make &&  make install
-```
-
-# 配置环境变量
-```
 # cd /usr/local
 
-# ln -s ssl ssl
+# tar -xzvf openssl-1.1.1i.tar.gz
 
-# vim /etc/ld.so.conf
-/usr/local/ssl/lib
+# cd openssl-1.1.1i
 
-# ldconfig
+# ./config --prefix=/usr/local/openssl --openssldir=/usr/local/openssl
 
-# vim /etc/profile
-export SSL_HOME=/usr/local/ssl
-export PATH=$PATH:{SSL_HOME}/bin
+# make &&  make install
 
-# source /etc/profile
+# ln -sf /usr/local/openssl/bin/openssl /usr/bin/openssl
 
-# mv /usr/bin/openssl /root/
+# echo "/usr/local/openssl/lib" >> /etc/ld.so.conf
 
-# ln -s /usr/local/ssl/bin/openssl /usr/bin/openssl
+# ldconfig -v
 ```
 
-# 查看openssl版本
-```
+### 3. 查看 ssl 版本
+```bash
 # openssl version
-OpenSSL 1.1.0g  2 Nov 2017
+OpenSSL 1.1.1i  8 Dec 2020
 ```
+
+## windows 下安装 ssl
+[openssl](http://slproweb.com/products/Win32OpenSSL.html 'openssl')
+
+### 1. 安装
+
+### 2. 配置环境变量
+1. 新建环境变量 "OPEN_SSL_HOME"，值是 "D:\Program Files\OpenSSL-Win64"
+2. 在 path 里添加 "%OPEN_SSL_HOME%\bin;"
